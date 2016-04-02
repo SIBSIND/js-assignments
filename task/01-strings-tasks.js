@@ -227,7 +227,9 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    throw new Error('Not implemented');
+    return str.replace(/[a-zA-Z]/g, function(c){
+        return String.fromCharCode((c <= "Z" ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26);
+    });
 }
 
 /**
@@ -244,7 +246,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    throw new Error('Not implemented');
+    return value instanceof String || typeof value === 'string';
 }
 
 
@@ -273,7 +275,9 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-    throw new Error('Not implemented');
+    const nums = 'A234567891JQK',
+        suits = '♣♦♥♠';
+    return suits.indexOf(value[value.length - 1]) * 13 + nums.indexOf(value[0]);
 }
 
 
